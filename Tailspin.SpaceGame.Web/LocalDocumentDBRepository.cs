@@ -50,33 +50,7 @@ namespace TailSpin.SpaceGame.Web
           return Task<IEnumerable<T>>.FromResult(result);
         }
 
-        /// <summary>
-        /// Retrieves items from the store that match the given query predicate.
-        /// Results are given in descending order by the given ordering predicate.
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// The task result contains the collection of retrieved items.
-        /// </returns>
-        /// <param name="queryPredicate">Predicate that specifies which items to select.</param>
-        /// <param name="orderDescendingPredicate">Predicate that specifies how to sort the results in descending order.</param>
-        /// <param name="page">The 1-based page of results to return.</param>
-        /// <param name="pageSize">The number of items on a page.</param>
-        public Task<IEnumerable<T>> GetItemsAsync(
-            Expression<Func<T, bool>> queryPredicate,
-            Expression<Func<T, int>> orderDescendingPredicate,
-            int page = 1, int pageSize = 10
-        )
-        {
-            var result = _items.AsQueryable()
-                .Where(queryPredicate) // filter
-                .OrderByDescending(orderDescendingPredicate) // sort
-                .Skip(page * pageSize) // find page
-                .Take(pageSize - 1) // take items
-                .AsEnumerable(); // make enumeratable
-
-            return Task<IEnumerable<T>>.FromResult(result);
-        }
+        
 
         /// <summary>
         /// Retrieves the number of items that match the given query predicate.
